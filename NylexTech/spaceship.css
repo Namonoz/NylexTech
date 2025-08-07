@@ -1,0 +1,181 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: sans-serif;
+  background: linear-gradient(to bottom, black, white);
+  overflow-x: hidden;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  z-index: 10;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.nav-links li a:hover {
+  transform: scale(1.2);
+  color: #ffcc00;
+}
+
+/* Slider Container */
+.slider-container {
+  position: relative;
+  width: 80vw;   /* 50% of screen width */
+  height: 75vh;  /* ~Half of screen height */
+  margin-top: 100px;
+  margin-left: 50px;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  background-color: #111;
+}
+
+/* Individual Slides */
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.985);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  animation: popup 0.4s ease;
+}
+
+/* Slide Images */
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* Arrows */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 28px;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+  z-index: 2;
+  transition: background 0.3s ease;
+}
+
+.arrow:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.arrow.left {
+  left: 10px;
+}
+
+.arrow.right {
+  right: 10px;
+}
+
+/* Popup Animation */
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.slider-text {
+  width: 70vw;
+  margin-left: 50px;
+  margin-top: 20px;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(3px);
+}
+
+.slider-text h2 {
+  font-size: 26px;
+  margin-bottom: 15px;
+  color: #ffcc00;
+}
+
+.slider-text p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: black;
+}
+
+/* Buttons */
+.product-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.buy-button,
+.cart-button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.buy-button {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+.cart-button {
+  background-color: #333;
+  color: black;
+  border: 1px solid #888;
+}
+
+.buy-button:hover,
+.cart-button:hover {
+  transform: scale(1.05);
+}

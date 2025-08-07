@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Spaceship Slider</title>
+  <link rel="stylesheet" href="spaceship.css" />
+  <style>
+    .buy-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.95);
+      background: rgba(30, 30, 30, 0.95);
+      color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      width: 300px;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s ease;
+    }
+
+    .buy-popup.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translate(-50%, -50%) scale(1);
+      animation: popup-fade 0.4s ease;
+    }
+
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 998;
+      backdrop-filter: blur(4px);
+      display: none;
+    }
+
+    .popup-overlay.active {
+      display: block;
+    }
+
+    @keyframes popup-fade {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    .popup-content h3 {
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: #ffcc00;
+    }
+
+    .robux-link {
+      display: block;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #00bfff;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .robux-link:hover {
+      background-color: #0099cc;
+    }
+
+    .cash-disabled {
+      display: block;
+      padding: 10px;
+      background-color: gray;
+      border-radius: 8px;
+      color: #ccc;
+      margin-bottom: 15px;
+      font-weight: bold;
+      cursor: not-allowed;
+    }
+
+    .close-popup {
+      padding: 8px 16px;
+      background-color: crimson;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .close-popup:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <nav>
+      <ul class="nav-links">
+        <li><a href="C:\Users\user\Documents\NylexTech\nylex.html">Home</a></li>
+        <li><a href="#">Model</a></li>
+        <li><a href="C:\Users\user\Documents\NylexTech\build.html">Builds</a></li>
+        <li><a href="C:\Users\user\Documents\NylexTech\cart.html">Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="slider-container">
+    <div class="slide active">
+      <img src="../NylexTech/Screenshot_7 (1).webp" alt="Slide 1" />
+    </div>
+    <div class="slide">
+      <img src="../NylexTech/IMG_20250504_221548_042.webp" alt="Slide 2" />
+    </div>
+    <div class="slide">
+      <img src="../NylexTech/RobloxScreenShot20250802_174618056_1.webp" alt="Slide 3" />
+    </div>
+
+    <div class="arrow left">&#8249;</div>
+    <div class="arrow right">&#8250;</div>
+  </div>
+
+  <div class="slider-text">
+    <h2>🚀 Spaceship – Interstellar Sci-Fi Map</h2>
+    <p>
+      Step into the heart of futuristic exploration with our **Spaceship Build** — a massive sci-fi map designed to ignite your imagination. This isn’t your ordinary spacecraft. Rather than being piloted, this intricate map serves as a dynamic, immersive environment perfect for roleplaying, showcasing, or expanding your sci-fi universe.
+      <br /><br />
+      Built with expansive scale and rich details, the spaceship includes multiple levels, glowing control panels, hangars, and corridors that feel alive with technology. Whether you’re staging an epic scene, setting up a galactic base, or just exploring, this spaceship map delivers a premium futuristic vibe that fits right into any sci-fi theme.
+      <br /><br />
+      Crafted with quality and creativity in mind, it's perfect for developers, gamers, and builders who want a high-impact visual centerpiece for their game or world.
+    </p>
+
+    <div class="product-actions">
+      <button class="buy-button">Buy Now</button>
+      <button class="cart-button" onclick="addToCart()">Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="popup-overlay" id="popup-overlay"></div>
+  <div class="buy-popup" id="buy-popup">
+    <div class="popup-content">
+      <h3>Select Payment Method</h3>
+      <a href="https://www.roblox.com/games/105956717033032/NylexTech-Hub?gameSetTypeId=100000003&homePageSessionInfo=f6be9f9c-568a-4f23-be6b-7d59add74461&isAd=false&numberOfLoadedTiles=117&page=homePage&placeId=105956717033032&position=1&sortPos=4&universeId=7633393144" class="robux-link" target="_blank">Buy with Robux</a>
+      <span class="cash-disabled">Cash (Coming Soon)</span>
+      <button class="close-popup">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const next = document.querySelector('.arrow.right');
+    const prev = document.querySelector('.arrow.left');
+    let index = 0;
+
+    function showSlide(i) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      slides[i].classList.add('active');
+    }
+
+    next.addEventListener('click', () => {
+      index = (index + 1) % slides.length;
+      showSlide(index);
+    });
+
+    prev.addEventListener('click', () => {
+      index = (index - 1 + slides.length) % slides.length;
+      showSlide(index);
+    });
+
+    // Popup logic
+    document.querySelector('.buy-button').addEventListener('click', () => {
+      document.getElementById('buy-popup').classList.add('active');
+      document.getElementById('popup-overlay').classList.add('active');
+    });
+
+    document.querySelector('.close-popup').addEventListener('click', () => {
+      document.getElementById('buy-popup').classList.remove('active');
+      document.getElementById('popup-overlay').classList.remove('active');
+    });
+  </script>
+ <script>
+  function addToCart() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const itemId = 'spaceship_build';
+
+    const alreadyExists = cart.find(item => item.id === itemId);
+    if (alreadyExists) {
+      alert('Item already in cart');
+      return;
+    }
+
+    const newItem = {
+      id: itemId,
+      title: 'Spaceship – Interstellar Sci-Fi Map',
+      description: 'Step into the heart of futuristic exploration with our Spaceship Build — a massive sci-fi map designed to ignite your imagination.',
+      image: '../NylexTech/Screenshot_7 (1).webp',
+      page: 'spaceship.html'
+    };
+
+    cart.push(newItem);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('Item added to cart');
+  }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.gradient-bg {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to bottom, black, white);
+  position: relative;
+  padding-top: 80px;
+}
+
+/* Header / Navbar */
+.navbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  z-index: 10;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 16px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  display: inline-block;
+}
+
+.nav-links li a:hover {
+  transform: scale(1.2);
+  color: #ffcc00;
+}
+
+/* Logo */
+.logo-container {
+  position: absolute;
+  top: 50px;
+  left: -100px;
+  z-index: 1;
+}
+
+.nt-logo {
+  width: 400px;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.nt-logo:hover {
+  transform: scale(1.1);
+}
+
+/* Fade-in delayed animation */
+.fade-in-delayed {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s ease forwards;
+  animation-delay: 0.8s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about-us {
+  max-width: 700px;
+  margin: 100px auto 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  animation-delay: 1.2s;
+}
+
+.about-us h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.about-us p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* Product Section */
+
+.product-section {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 60px;
+  padding-left: 50px;
+  position: relative;
+}
+
+.product-section input[type="radio"] {
+  display: none;
+}
+
+.product-wrapper {
+  position: relative;
+  width: 300px;
+  height: 300px;
+}
+
+.product-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.product-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-description {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+  color: white;
+  font-size: 14px;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.product-card:hover .product-description {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Show product1 when prod1 checked */
+#prod1:checked ~ .product-wrapper .product1 {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* Show product2 when prod2 checked */
+#prod2:checked ~ .product-wrapper .product2 {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* Arrows styling */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 28px;
+  color: white;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.3s;
+  user-select: none;
+}
+
+.arrow:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.arrow.left {
+  left: -40px;
+}
+
+.arrow.right {
+  right: -40px;
+}
+.vision-section {
+  max-width: 800px;
+  margin: 2rem auto 3rem auto;
+  padding: 2rem;
+  background-color: #fdfdfd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  text-align: left;
+  position: relative;
+  top: 80px;
+  left: 40px;
+}

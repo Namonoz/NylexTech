@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart – Nylex Tech</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="popup.css" />
+  <style>
+    body {
+      background: linear-gradient(to bottom, black, white);
+      color: white;
+      font-family: sans-serif;
+      padding: 40px;
+    }
+    h1 {
+      font-size: 32px;
+      color: #ffcc00;
+      margin-top: 100px;
+      margin-bottom: 30px;
+    }
+    .cart-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 12px;
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(3px);
+      align-items: center;
+    }
+    .cart-item img {
+      width: 150px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+    }
+    .cart-details {
+      flex: 1;
+    }
+    .cart-details h2 {
+      margin: 0;
+      font-size: 20px;
+      color: #ffcc00;
+    }
+    .cart-details p {
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+    .remove-btn,
+    .buy-btn {
+      padding: 8px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    .remove-btn {
+      background: crimson;
+      color: white;
+    }
+    .remove-btn:hover {
+      background: darkred;
+    }
+    .buy-btn {
+      background: #ffcc00;
+      color: black;
+      margin-left: 10px;
+    }
+    .buy-btn:hover {
+      background: gold;
+    }
+
+    .navbar {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 20px;
+      z-index: 10;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: transform 0.3s ease, color 0.3s ease;
+      display: inline-block;
+    }
+    .nav-links li a:hover {
+      transform: scale(1.2);
+      color: #ffcc00;
+    }
+
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 998;
+      display: none;
+    }
+
+    .popup-overlay.show {
+      display: block;
+    }
+
+    .buy-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.95);
+      background: rgba(30, 30, 30, 0.95);
+      color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      display: none;
+      width: 300px;
+      text-align: center;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .buy-popup.show {
+      display: block;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .popup-content h3 {
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: #ffcc00;
+    }
+
+    .robux-link {
+      display: block;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #00bfff;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .robux-link:hover {
+      background-color: #0099cc;
+    }
+
+    .cash-disabled {
+      display: block;
+      padding: 10px;
+      background-color: gray;
+      border-radius: 8px;
+      color: #ccc;
+      margin-bottom: 15px;
+      font-weight: bold;
+      cursor: not-allowed;
+    }
+
+    .close-popup {
+      padding: 8px 16px;
+      background-color: crimson;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .close-popup:hover {
+      background-color: darkred;
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <nav>
+      <ul class="nav-links">
+        <li><a href="C:\Users\user\Documents\NylexTech\nylex.html">Home</a></li>
+        <li><a href="#">Model</a></li>
+        <li><a href="C:\Users\user\Documents\NylexTech\build.html">Builds</a></li>
+        <li><a href="C:\Users\user\Documents\NylexTech\cart.html">Cart</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <h1>Your Cart</h1>
+  <div id="cart-items"></div>
+
+  <div class="popup-overlay" id="popup-overlay"></div>
+  <div class="buy-popup" id="buy-popup">
+    <div class="popup-content">
+      <h3>Select Payment Method</h3>
+      <a href="https://www.roblox.com/games/105956717033032/NylexTech-Hub?gameSetTypeId=100000003&homePageSessionInfo=f6be9f9c-568a-4f23-be6b-7d59add74461&isAd=false&numberOfLoadedTiles=117&page=homePage&placeId=105956717033032&position=1&sortPos=4&universeId=7633393144" class="robux-link" target="_blank">Buy with Robux</a>
+      <span class="cash-disabled">Cash (Coming Soon)</span>
+      <button class="close-popup">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const cartContainer = document.getElementById('cart-items');
+    const buyPopup = document.getElementById('buy-popup');
+    const overlay = document.getElementById('popup-overlay');
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function renderCart() {
+      cartContainer.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+
+        const img = document.createElement('img');
+        img.src = item.image;
+        img.alt = item.title;
+        img.addEventListener('click', () => {
+          window.location.href = item.page;
+        });
+
+        const details = document.createElement('div');
+        details.className = 'cart-details';
+        details.innerHTML = `
+          <h2>${item.title}</h2>
+          <p>${item.description}</p>
+        `;
+
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-btn';
+        removeBtn.innerText = 'Remove';
+        removeBtn.onclick = () => {
+          cart = cart.filter(c => c.id !== item.id);
+          localStorage.setItem('cart', JSON.stringify(cart));
+          renderCart();
+        };
+
+        const buyBtn = document.createElement('button');
+        buyBtn.className = 'buy-btn';
+        buyBtn.innerText = 'Buy';
+        buyBtn.onclick = () => {
+          buyPopup.classList.add('show');
+          overlay.classList.add('show');
+        };
+
+        itemDiv.appendChild(img);
+        itemDiv.appendChild(details);
+        itemDiv.appendChild(removeBtn);
+        itemDiv.appendChild(buyBtn);
+        cartContainer.appendChild(itemDiv);
+      });
+    }
+
+    document.querySelector('.close-popup').addEventListener('click', () => {
+      buyPopup.classList.remove('show');
+      overlay.classList.remove('show');
+    });
+
+    overlay.addEventListener('click', () => {
+      buyPopup.classList.remove('show');
+      overlay.classList.remove('show');
+    });
+
+    renderCart();
+  </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nylex Tech – Builds</title>
+  <link rel="stylesheet" href="builds.css" />
+</head>
+<body>
+  <div class="builds-bg">
+    <header class="builds-navbar animate-on-load">
+      <nav>
+        <ul class="builds-nav-links">
+          <li><a href="C:\Users\user\Documents\NylexTech\nylex.html">Home</a></li>
+          <li><a href="#">Model</a></li>
+          <li><a href="C:\Users\user\Documents\idk\build.html">Builds</a></li>
+          <li><a href="C:\Users\user\Documents\idk\cart.html">Cart</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Top left image below navbar -->
+    <div class="top-left-image-container animate-on-load">
+      <img src="../NylexTech/file_000000005a1461f78145d299e32dda9f.png" alt="" class="top-left-image" />
+    </div>
+
+    <section class="product-list-section">
+      <div class="section-content">
+        <h1 class="builds-title animate-on-load">builds</h1>
+
+        <div class="search-container animate-on-load">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search builds..."
+            aria-label="Search builds"
+          />
+          <div class="search-results">
+            <a href="C:\Users\KING\Documents\idk\nylex.html" class="search-result-item" tabindex="0">
+              <img src="../NylexTech/IMG_20250504_221548_042.webp" alt="Spaceship" />
+              <span>Spaceship</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="product-list">
+      <a href="C:\Users\user\Documents\NylexTech\spaceship.html" class="product-card-link" tabindex="0">
+        <div class="product-card animate-on-load">
+          <img src="../NylexTech/IMG_20250504_221548_042.webp" alt="Spaceship Map" />
+          <div class="description-overlay">
+            The spaceship is not a kind of spaceship you can drive but more like a SciFi spaceship kind of map. It can be used as a map; it is a really big map and really nice.
+          </div>
+        </div>
+      </a>
+    </section>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const cards = document.querySelectorAll(".product-card.animate-on-load");
+      cards.forEach((card, index) => {
+        card.style.animationDelay = `${0.7 + index * 0.2}s`;
+      });
+    });
+  </script>
+</body>
+</html>
